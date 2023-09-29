@@ -18,8 +18,8 @@ class Univallunos(models.Model):
     tieneArticulo = models.BooleanField(default=False)
 
 class Prestamos(models.Model):
-    univalluno = models.OneToOneField(Univallunos, null=True, Blank=True, on_delete=models.CASCADE)
-    articulo = models.OneToOneField(ArticuloDeportivo, null=True, Blank=True, on_delete=models.CASCADE)
+    univalluno = models.OneToOneField(Univallunos, null=True, on_delete=models.CASCADE)
+    articulo = models.OneToOneField(ArticuloDeportivo, null=True, on_delete=models.CASCADE)
     fechaPrestamo = models.DateTimeField().auto_now_add
     fechaEntrega = models.DateTimeField()
 
@@ -28,7 +28,7 @@ class Multa(models.Model):
     valor = models.IntegerField()
     fechaPago = models.DateTimeField()
     pagado = models.BooleanField(default=False)
-    
+
 
 
 
