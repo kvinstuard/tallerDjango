@@ -1,12 +1,5 @@
 from django.db import models
 
-class ArticuloDeportivo(models.Model):
-    nombre = models.CharField(max_length=100)
-    deporte = models.CharField(max_length=100)
-    descripcion = models.TextField()
-    valor = models.IntegerField()
-    prestado = models.BooleanField(default=False)
-
 class Univallunos(models.Model):
     nombres = models.CharField(max_length=100)
     apellidos= models.CharField(max_length=100)
@@ -17,9 +10,20 @@ class Univallunos(models.Model):
     correo = models.CharField(max_length=100)
     tieneArticulo = models.BooleanField(default=False)
 
+    class Meta:
+        unique_together = (("numeroDocumento","tipoDocumento"),)
+
+class ArticuloDeportivo(models.Model):
+    nombre = models.CharField(max_length=100)
+    deporte = models.CharField(max_length=100)
+    descripcion = models.TextField()
+    valor = models.IntegerField()
+    prestado = models.BooleanField(default=False)
+
+
 class Prestamos(models.Model):
-    univalluno = models.OneToOneField(Univallunos, null=True, on_delete=models.CASCADE)
-    articulo = models.OneToOneField(ArticuloDeportivo, null=True, on_delete=models.CASCADE)
+    univalluno = models.ForeignKey(Univallunos, on_delete=models.CASCADE, null=True)
+    articulo = models.ForeignKey(ArticuloDeportivo, on_delete=models.CASCADE, null=True)
     fechaPrestamo = models.DateTimeField().auto_now_add
     fechaEntrega = models.DateTimeField()
 
