@@ -22,8 +22,8 @@ class ArticuloDeportivo(models.Model):
 
 
 class Prestamos(models.Model):
-    univalluno = models.ForeignKey(Univallunos, on_delete=models.CASCADE, null=True, unique = True)
-    articulo = models.ForeignKey(ArticuloDeportivo, on_delete=models.CASCADE, null=True, unique = True)
+    univalluno = models.OneToOneField(Univallunos, on_delete=models.CASCADE, null=True)
+    articulo = models.OneToOneField(ArticuloDeportivo, on_delete=models.CASCADE, null=True)
     fechaPrestamo = models.DateTimeField().auto_now_add
     fechaEntrega = models.DateTimeField()
 
