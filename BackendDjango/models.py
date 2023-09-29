@@ -22,10 +22,11 @@ class ArticuloDeportivo(models.Model):
 
 
 class Prestamos(models.Model):
-    univalluno = models.ForeignKey(Univallunos, on_delete=models.CASCADE, null=True)
-    articulo = models.ForeignKey(ArticuloDeportivo, on_delete=models.CASCADE, null=True)
+    univalluno = models.OneToOneField(Univallunos, on_delete=models.CASCADE, null=True)
+    articulo = models.OneToOneField(ArticuloDeportivo, on_delete=models.CASCADE, null=True)
     fechaPrestamo = models.DateTimeField().auto_now_add
     fechaEntrega = models.DateTimeField()
+
 
 class Multa(models.Model):
     fechaMulta = models.DateField().auto_now_add
