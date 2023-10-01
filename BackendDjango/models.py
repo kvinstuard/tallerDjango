@@ -20,7 +20,7 @@ class Univallunos(models.Model):
 
 class Multa(models.Model):
     univalluno = models.ForeignKey(Univallunos, on_delete=models.CASCADE, null=True)
-    fechaMulta = models.DateField().auto_now_add
+    fechaMulta = models.DateField(default=datetime.today())
     valor = models.IntegerField()
     fechaPago = models.DateTimeField(null=True)
     pagado = models.BooleanField(default=False)

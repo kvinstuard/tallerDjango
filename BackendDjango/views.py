@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.http import HttpResponse
-from django.db.models import Count
+from django.db.models import Count, Sum
 from django.db.models.functions import TruncDate
 
 from .models import Univallunos, Multa, Prestamos, ArticuloDeportivo
@@ -29,9 +29,13 @@ def prestamos(request):
    return render(request, 'prestamos.html')
 
 def multas(request):
-   multas = Multa.objects.filter(pagado=False)
-   contexto = {'multas': multas}
-   print("contexto",contexto)
+   # Obtener las multas por día
+   multas = Multa.objects.filter(fechaMulta__range=('2001-01-01', datetime.today()))
+   data = multas.annotate(dia=TruncDate('fechaMulta')).values('fechaMulta').annotate(total=Sum('valor'))
+   contexto = {
+                'multas': data
+            }
+   print("contexto_multas:",data)
    return render(request, 'multas.html', contexto)
 
 def reportes(request):
