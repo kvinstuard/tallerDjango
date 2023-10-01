@@ -1,37 +1,38 @@
 {% extends 'index.html' %}
 
 {% block cuerpo %}
-   <table id="multasTable" class="display">
-      <thead>
-         <tr>
-            <th>Fecha de Multa</th>
-            <th>Valor</th>
-            <th>Fecha de Pago</th>
-            <th>Pagado</th>
-         </tr>
-      </thead>
-      <tbody>
-         {% for multa in multas %}
+   <div class="container">
+      <h1>Multas Generadas por Día desde 2001 hasta la Actualidad</h1>
+      <table id="multasTable" class="display table table-striped">
+         <thead>
             <tr>
-               <td>{{ multa.fechaMulta }}</td>
-               <td>{{ multa.valor }}</td>
-               <td>{{ multa.fechaPago }}</td>
-               <td>{{ multa.pagado }}</td>
+               <th>Fecha de Multa</th>
+               <th>Valor</th>
             </tr>
-         {% empty %}
-            <tr>
-               <td colspan="4">NO HAY MULTAS</td>
-            </tr>
-         {% endfor %}
-      </tbody>
-   </table>
+         </thead>
+         <tbody>
+            {% for multa in multas %}
+               <tr>
+                  <td>{{ multa.fechaMulta }}</td>
+                  <td>{{ multa.total }}</td>
+               </tr>
+            {% empty %}
+               <tr>
+                  <td colspan="4">NO HAY MULTAS</td>
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+   </div>
 
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+   
    <script>
       $(document).ready(function() {
          $('#multasTable').DataTable();
       });
    </script>
 {% endblock %}
-
 
 

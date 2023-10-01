@@ -1,8 +1,12 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.http import HttpResponse
+from django.db.models import Count, Sum
+from django.db.models.functions import TruncDate
+
 from .models import Univallunos, Multa, Prestamos, ArticuloDeportivo
 import json
+from datetime import date
 
 miscrip = """<div class="dropdown">
   <button class="dropbtn">Dropdown</button>
@@ -25,13 +29,31 @@ def prestamos(request):
    return render(request, 'prestamos.html')
 
 def multas(request):
-   multas = Multa.objects.filter(pagado=False)
-   contexto = {'multas': multas}
-   print("contexto",contexto)
+   # Obtener las multas por día
+   multas = Multa.objects.filter(fechaMulta__range=('2001-01-01', datetime.today()))
+   data = multas.annotate(dia=TruncDate('fechaMulta')).values('fechaMulta').annotate(total=Sum('valor'))
+   contexto = {
+                'multas': data
+            }
+   print("contexto_multas:",data)
    return render(request, 'multas.html', contexto)
 
 def reportes(request):
-   return render(request, 'reportes.html')
+   # obtener prestamos por deportes
+   prestamos_deportes = Prestamos.objects.filter(fechaPrestamo__range=('2001-01-01', datetime.today()))
+   prestamos_por_articulo = prestamos_deportes.values('articulo__nombre').annotate(total=Count('id'))
+   # obtener prestamos por día
+   prestamos = Prestamos.objects.filter(fechaPrestamo__range=('2001-01-01', datetime.today()))
+   data = prestamos.annotate(dia=TruncDate('fechaPrestamo')).values('dia').annotate(total=Count('id'))
+   # creamos el contexto
+   contexto = {
+        "nombres_articulos": [articulo['articulo__nombre'] for articulo in prestamos_por_articulo],
+        "cantidades": [articulo['total'] for articulo in prestamos_por_articulo],
+        "dias_articulos": [dia['dia'].strftime('%Y-%m-%d') for dia in data],
+        "cantidades_dias": [dia['total'] for dia in data],
+       }
+   print("contexto:", contexto)
+   return render(request, 'reportes.html', contexto)
 
 def bienvenida(request):
    return render(request, 'index.html')

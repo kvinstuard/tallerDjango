@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime, date
 
 class ArticuloDeportivo(models.Model):
     nombre = models.CharField(max_length=100)
@@ -19,7 +20,7 @@ class Univallunos(models.Model):
 
 class Multa(models.Model):
     univalluno = models.ForeignKey(Univallunos, on_delete=models.CASCADE, null=True)
-    fechaMulta = models.DateField().auto_now_add
+    fechaMulta = models.DateField(default=datetime.today())
     valor = models.IntegerField()
     fechaPago = models.DateTimeField(null=True)
     pagado = models.BooleanField(default=False)
@@ -27,5 +28,5 @@ class Multa(models.Model):
 class Prestamos(models.Model):
     univalluno = models.OneToOneField(Univallunos, on_delete=models.CASCADE, null=True)
     articulo = models.OneToOneField(ArticuloDeportivo, on_delete=models.CASCADE, null=True)
-    fechaPrestamo = models.DateTimeField().auto_now_add
+    fechaPrestamo = models.DateTimeField(default=datetime.today())
     fechaEntrega = models.DateTimeField()
