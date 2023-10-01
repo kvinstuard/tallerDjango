@@ -1,47 +1,104 @@
-<h1>REPORTES</h1>
+{% extends 'index.html' %}
 
-<h2>Navegador</h2>
-<ul>
-   <button id='home'><a href='/'>Home</a></button>
-   <li>
-      <button id='univallunos_btn'><a href='/univallunos'>univallunos</a></button>
-
-   </li>
-   <li>
-      <button id='articulos_deportivos_btn'><a href='/articulos'>articulos deportivos</a></button>
-      
-   </li>
-   <li>
-      <button id='multas_btn'><a href='/multas'>multas</a></button>
-      
-   </li>
-   <li>
-      <button id='prestamos_btn'><a href='/prestamos'>prestamos</a></button>
-      
-   </li>
-   <li>
-      <button id='reportes_btn'><a href='/reportes'>reportes</a></button>
-      
-   </li>
-</ul>
-
+{% block cuerpo %}
 <div>
-   <canvas id="myChart"></canvas>
+   <h1> Reporte de artículos deportivos prestados por cada
+    deporte desde 2001 hasta la actualidad. </h1>
+   <canvas id="reportes_articulos_deportes"></canvas>
+   <h1> Reporte de artículos deportivos prestados por cada día
+    desde 2001 hasta la actualidad. </h1>
+   <canvas id="reportes_articulos_dia"></canvas>
  </div>
  
  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
  
  <script>
-   const ctx = document.getElementById('myChart');
- 
-   new Chart(ctx, {
+  //--------------------------------------------------------------------
+  // Funciones auxiliares
+  //--------------------------------------------------------------------
+  // Funcion para volver un string en un array
+  function stringToArray(string) {
+      if (string == "[]") return [];
+      try {
+          var array = JSON.parse(string);
+          if (Array.isArray(array)) {
+              return array;
+          } else {
+              throw new Error("La cadena no representa un array JSON válido.");
+          }
+      } catch (error) {
+          console.error("Error al convertir la cadena en un array:", error.message);
+          return []; // Devuelve un array vacío en caso de error
+      }
+  }
+  
+  // Función para guardar datos de django limpios
+  function limpiarStringDjango(stringDjango) {
+    var textarea = document.createElement("textarea");
+    textarea.innerHTML = stringDjango;
+    return stringToArray(textarea.value.replace(/'/g, '"'));
+  } 
+
+  //--------------------------------------------------------------------
+  // Datos de articulos por deporte
+  //--------------------------------------------------------------------
+  // guardamos los datos en el arreglo data
+  nombres_articulos = ["{{ nombres_articulos }}"]
+  cantidades = ["{{ cantidades }}"]
+
+  // limpiamos los datos antes de ponerlos en pantalla
+  nombres_articulos_limpios = limpiarStringDjango(nombres_articulos[0])
+  cantidades_limpias = limpiarStringDjango(cantidades[0])
+  console.log("cantidades:",cantidades_limpias)
+
+  //--------------------------------------------------------------------
+  // Datos de articulos por día
+  //--------------------------------------------------------------------
+  // guardamos los datos en el arreglo data
+  dias_articulos = ["{{ dias_articulos }}"]
+  cantidades_dias = ["{{ cantidades_dias }}"]
+
+  // limpiamos los datos antes de ponerlos en pantalla
+  dias_articulos_limpios = limpiarStringDjango(dias_articulos[0])
+  cantidades_dias_limpias = limpiarStringDjango(cantidades_dias[0])
+  console.log("cantidades_dias:",cantidades_dias_limpias)
+
+  //--------------------------------------------------------------------
+  // Se realiza el gráfico de barras
+  //--------------------------------------------------------------------
+
+   const ctx_articulos_deportes = document.getElementById('reportes_articulos_deportes');
+   const ctx_articulos_dia = document.getElementById('reportes_articulos_dia');
+
+   new Chart(ctx_articulos_deportes, {
      type: 'bar',
      data: {
-       labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+       labels: nombres_articulos_limpios,
        datasets: [{
-         label: '# of Votes',
-         data: [12, 19, 3, 5, 2, 3],
-         borderWidth: 1
+         label: 'Cantidad articulos',
+         data: cantidades_limpias
+        ,
+         borderWidth: 2
+       }]
+     },
+     options: {
+       scales: {
+         y: {
+           beginAtZero: true
+         }
+       }
+     }
+   });
+
+   new Chart(ctx_articulos_dia, {
+     type: 'bar',
+     data: {
+       labels: dias_articulos_limpios,
+       datasets: [{
+         label: 'Cantidad articulos',
+         data: cantidades_dias_limpias
+        ,
+         borderWidth: 2
        }]
      },
      options: {
@@ -53,3 +110,4 @@
      }
    });
  </script>
+{% endblock %}
