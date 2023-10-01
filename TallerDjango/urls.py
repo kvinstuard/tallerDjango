@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from BackendDjango.views import generar_multa, pagar_multa
+from BackendDjango import views
 
 
 urlpatterns = [
@@ -27,6 +27,6 @@ urlpatterns = [
     path('prestamos/', views.prestamos),
     path('multas/', views.multas),
     path('reportes/', views.reportes),
-    path('multar/<int:no_documento>', generar_multa, name = "agregar multa"),
-    path('pagar/<int:no_documento>', pagar_multa, name = "pagar multa"),
+    path('multar/<int:no_documento>', views.generar_multa, name = "agregar multa"),
+    path('pagar/<int:no_documento>', views.pagar_multa, name = "pagar multa"),
 ]
