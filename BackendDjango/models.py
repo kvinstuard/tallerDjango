@@ -13,6 +13,7 @@ class Univallunos(models.Model):
     esEstudiante = models.BooleanField(default=False)
     tipoDocumento = models.CharField(max_length=100)
     numeroDocumento = models.IntegerField()
+    codigoEstudiante = models.IntegerField(unique=True, default="2023000000", blank=True, null=True)
     correo = models.CharField(max_length=100)
 
     class Meta:
@@ -30,3 +31,4 @@ class Prestamos(models.Model):
     articulo = models.OneToOneField(ArticuloDeportivo, on_delete=models.CASCADE, null=True)
     fechaPrestamo = models.DateTimeField(default=datetime.today())
     fechaEntrega = models.DateTimeField()
+    fechaVencimiento = models.DateTimeField(default=f'{date.today()} 20:00:00', editable=False)
