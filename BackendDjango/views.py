@@ -3,6 +3,8 @@ from django.urls import reverse
 from django.http import HttpResponse
 from django.db.models import Count, Sum
 from django.db.models.functions import TruncDate
+from rest_framework.views import APIView
+from . import serializers
 
 from .models import Univallunos, Multa, Prestamos, ArticuloDeportivo
 import json
@@ -157,3 +159,9 @@ def pagar_multa(request, no_documento):
         }
         response_data = json.dumps(message_data)
         return HttpResponse(response_data, content_type='application/json', status=200)
+    
+# Vista para ver todos los prestamos
+def viewAllPrestamos(request):
+    prestamos = Prestamos.objects.all()
+    prestamos_serializer = serializers.PrestamoSerializer(prestamos, many=True).data
+    return HttpResponse(json.dumps(prestamos_serializer), content_type='application/json', status=200)
