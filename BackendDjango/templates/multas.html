@@ -1,26 +1,37 @@
-<h1>MULTAS</h1>
+{% extends 'index.html' %}
 
-<h2>Navegador</h2>
-<ul>
-   <button id='home'><a href='/'>Home</a></button>
-   <li>
-      <button id='univallunos_btn'><a href='/univallunos'>univallunos</a></button>
+{% block cuerpo %}
+   <table id="multasTable" class="display">
+      <thead>
+         <tr>
+            <th>Fecha de Multa</th>
+            <th>Valor</th>
+            <th>Fecha de Pago</th>
+            <th>Pagado</th>
+         </tr>
+      </thead>
+      <tbody>
+         {% for multa in multas %}
+            <tr>
+               <td>{{ multa.fechaMulta }}</td>
+               <td>{{ multa.valor }}</td>
+               <td>{{ multa.fechaPago }}</td>
+               <td>{{ multa.pagado }}</td>
+            </tr>
+         {% empty %}
+            <tr>
+               <td colspan="4">NO HAY MULTAS</td>
+            </tr>
+         {% endfor %}
+      </tbody>
+   </table>
 
-   </li>
-   <li>
-      <button id='articulos_deportivos_btn'><a href='/articulos'>articulos deportivos</a></button>
-      
-   </li>
-   <li>
-      <button id='multas_btn'><a href='/multas'>multas</a></button>
-      
-   </li>
-   <li>
-      <button id='prestamos_btn'><a href='/prestamos'>prestamos</a></button>
-      
-   </li>
-   <li>
-      <button id='reportes_btn'><a href='/reportes'>reportes</a></button>
-      
-   </li>
-</ul>
+   <script>
+      $(document).ready(function() {
+         $('#multasTable').DataTable();
+      });
+   </script>
+{% endblock %}
+
+
+

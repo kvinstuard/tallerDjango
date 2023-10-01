@@ -1,26 +1,41 @@
-<h1>BIENVENIDO</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+<body>
+   <h1>BIENVENIDO</h1>
 
-<h2>Navegador</h2>
-<ul>
-   <button id='home'><a href='/'>Home</a></button>
-   <li>
-      <button id='univallunos_btn'><a href='/univallunos'>univallunos</a></button>
+   <h2>Navegador</h2>
+   <ul>
+      <button id='home'><a href='/'>Home</a></button>
+      <li>
+         <button id='univallunos_btn'><a href='/univallunos'>univallunos</a></button>
 
-   </li>
-   <li>
-      <button id='articulos_deportivos_btn'><a href='/articulos'>articulos deportivos</a></button>
-      
-   </li>
-   <li>
-      <button id='multas_btn'><a href='/multas'>multas</a></button>
-      
-   </li>
-   <li>
-      <button id='prestamos_btn'><a href='/prestamos'>prestamos</a></button>
-      
-   </li>
-   <li>
-      <button id='reportes_btn'><a href='/reportes'>reportes</a></button>
-      
-   </li>
-</ul>
+      </li>
+      <li>
+         <button id='articulos_deportivos_btn'><a href='/articulos'>articulos deportivos</a></button>
+         
+      </li>
+      <li>
+         <button id='multas_btn'><a href='/multas'>multas</a></button>
+         
+      </li>
+      <li>
+         <button id='prestamos_btn'><a href='/prestamos'>prestamos</a></button>
+         
+      </li>
+      <li>
+         <button id='reportes_btn'><a href='/reportes'>reportes</a></button>
+         
+      </li>
+
+      {% block cuerpo %}
+         <p> prueba </p>
+      {% endblock %}
+   </ul>
+</body>
+</html>
+

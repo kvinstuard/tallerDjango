@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from . import models
+import json
 
 miscrip = """<div class="dropdown">
   <button class="dropbtn">Dropdown</button>
@@ -22,7 +24,10 @@ def prestamos(request):
    return render(request, 'prestamos.html')
 
 def multas(request):
-   return render(request, 'multas.html')
+   multas = models.Multa.objects.filter(pagado=False)
+   contexto = {'multas': multas}
+   print("contexto",contexto)
+   return render(request, 'multas.html', contexto)
 
 def reportes(request):
    return render(request, 'reportes.html')
