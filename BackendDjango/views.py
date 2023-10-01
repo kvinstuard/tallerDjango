@@ -3,7 +3,6 @@ from django.urls import reverse
 from django.http import HttpResponse
 import json
 from .models import Univallunos, Multa, Prestamos, ArticuloDeportivo
-from .forms import MultarForm
 from datetime import date, datetime
 
 # Create your views here.
