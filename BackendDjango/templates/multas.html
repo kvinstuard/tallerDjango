@@ -1,0 +1,37 @@
+{% extends 'index.html' %}
+
+{% block cuerpo %}
+   <table id="multasTable" class="display">
+      <thead>
+         <tr>
+            <th>Fecha de Multa</th>
+            <th>Valor</th>
+            <th>Fecha de Pago</th>
+            <th>Pagado</th>
+         </tr>
+      </thead>
+      <tbody>
+         {% for multa in multas %}
+            <tr>
+               <td>{{ multa.fechaMulta }}</td>
+               <td>{{ multa.valor }}</td>
+               <td>{{ multa.fechaPago }}</td>
+               <td>{{ multa.pagado }}</td>
+            </tr>
+         {% empty %}
+            <tr>
+               <td colspan="4">NO HAY MULTAS</td>
+            </tr>
+         {% endfor %}
+      </tbody>
+   </table>
+
+   <script>
+      $(document).ready(function() {
+         $('#multasTable').DataTable();
+      });
+   </script>
+{% endblock %}
+
+
+
