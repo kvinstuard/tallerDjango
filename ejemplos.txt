@@ -1,0 +1,3 @@
+http://127.0.0.1:8000/multar/123 -> multa al univalluno con código 123.
+
+http://127.0.0.1:8000/pagar/123 -> paga la multa el univalluno con código 123. 

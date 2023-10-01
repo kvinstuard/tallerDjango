@@ -1,5 +1,7 @@
 env
 TallerDjango/__pycache__/
+BackendDjango/migrations/*.py
+shortcuts.txt
 __pycache__/
 *.pyc
 *.pyo

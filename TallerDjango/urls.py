@@ -16,7 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from BackendDjango.views import generar_multa, pagar_multa
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('multar/<int:no_documento>', generar_multa, name = "agregar multa"),
+    path('pagar/<int:no_documento>', pagar_multa, name = "pagar multa"),
 ]
