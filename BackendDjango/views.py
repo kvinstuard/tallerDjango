@@ -13,19 +13,19 @@ miscrip = """<div class="dropdown">
 # Create your views here.
 
 def univallunos(request):
-   return HttpResponse("<script src='univallunos.js'></script>")
+   return render(request, 'univallunos.html')
 
 def articulos_deportivos(request):
-   return HttpResponse("<script src='articulos_deportivos.js'></script>")
+   return render(request, 'articulos_deportivos.html')
 
 def prestamos(request):
-   return HttpResponse("<script src='prestamos.js'></script>")
+   return render(request, 'prestamos.html')
 
 def multas(request):
-   return HttpResponse("<script src='multas.js'></script>")
+   return render(request, 'multas.html')
 
 def reportes(request):
-   return HttpResponse("<script src='reportes.js'></script>")
+   return render(request, 'reportes.html')
 
 def bienvenida(request):
    return render(request, 'index.html')
