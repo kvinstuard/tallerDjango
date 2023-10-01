@@ -17,6 +17,7 @@ Taller de Django dejado el viernes 29 de septiembre del 2023 en la clase WWW.
 - En ejemplos.txt se muestra como ejecutar los end-points.
 - Si se elige que es un estudiante, el código ingresado se toma en cuenta, de lo contrario será nulo.
 - Si un Univalluno paga todas sus multas, libera el articulo deportivo
+- El código de Estudiante es único.
 
 ## Requerimientos
 hay una lista de requerimientos la cual se puede instalar en un ambiente global o virtual, con todas las librerías usadas para este taller.
