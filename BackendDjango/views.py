@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.http import HttpResponse
 from .models import Univallunos, Multa, Prestamos, ArticuloDeportivo
 import json
+from datetime import date
 
 miscrip = """<div class="dropdown">
   <button class="dropbtn">Dropdown</button>
@@ -31,7 +32,9 @@ def multas(request):
    return render(request, 'multas.html', contexto)
 
 def reportes(request):
-   return render(request, 'reportes.html')
+   prestamos_deportes = Prestamos.objects.filter(fechaPrestamo__range=('2001-01-01', date.today()))
+   contexto = {"prestamos_deportes": prestamos_deportes}
+   return render(request, 'reportes.html', contexto)
 
 def bienvenida(request):
    return render(request, 'index.html')

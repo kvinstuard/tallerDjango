@@ -20,7 +20,7 @@ from BackendDjango import views
 
 
 urlpatterns = [
-    path('', include('BackendDjango.urls')),
+    path('', views.bienvenida),
     path('admin/', admin.site.urls),
     path('univallunos/', views.univallunos),
     path('articulos/', views.articulos_deportivos),
