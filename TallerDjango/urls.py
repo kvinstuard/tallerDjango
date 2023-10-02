@@ -24,7 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # path('univallunos/', views.univallunos),
     # path('articulos/', views.articulos_deportivos),
-    # path('prestamos/', views.prestamos),
+    path('prestamos/', views.viewAllPrestamos),
     path('multas/', views.multas),
     path('reportes/', views.reportes),
     path('multar/<int:no_documento>', views.generar_multa, name = "agregar multa"),
