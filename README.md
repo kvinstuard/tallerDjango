@@ -15,9 +15,12 @@ Taller de Django dejado el viernes 29 de septiembre del 2023 en la clase WWW.
 - No hicimos interfaces gráficas con mucho detalle en CSS.
 - El CRUD de cada modelo se hace desde el menú de administrador de Django.
 - En ejemplos.txt se muestra como ejecutar los end-points.
+- Se asume que si hay un univalluno que labore y estudie, deberá tener 2 registros diferentes con el mismo número de documento.
 - Si se elige que es un estudiante, el código ingresado se toma en cuenta, de lo contrario será nulo.
+- Si el univalluno no entrega el articulo, por cada día que pase, se generará una nueva multa a su nombre.
 - Si un Univalluno paga todas sus multas, libera el articulo deportivo
-- El código de Estudiante es único.
+- El proceso de generar las multas deberá hacerlo un operador de la aplicación, no es automatico.
+- El código de Estudiante es único y no editable.
 
 ## Requerimientos
 hay una lista de requerimientos la cual se puede instalar en un ambiente global o virtual, con todas las librerías usadas para este taller.
