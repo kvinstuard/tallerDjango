@@ -16,7 +16,7 @@ Taller de Django dejado el viernes 29 de septiembre del 2023 en la clase WWW.
 - El CRUD de cada modelo se hace desde el menú de administrador de Django.
 - En ejemplos.txt se muestra como ejecutar los end-points.
 - Si se elige que es un estudiante, el código ingresado se toma en cuenta, de lo contrario será nulo.
-- Si un Univalluno paga todas sus multas, libera el articulo deportivo
+- Si un Univalluno paga todas sus multas, libera el articulo deportivo.
 - El código de Estudiante es único.
 
 ## Requerimientos
